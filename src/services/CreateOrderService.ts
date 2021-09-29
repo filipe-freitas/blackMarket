@@ -1,4 +1,4 @@
-import validate from "../ValidateDocumentNumber";
+import validateCPF from "../ValidateDocumentNumber";
 
 interface CreateOrderDTO {
   userDocument: string;
@@ -16,7 +16,7 @@ interface OrderDTO {
 
 class CreateOrderService {
   public async execute({userDocument, products, discountValue}: CreateOrderDTO): Promise<OrderDTO> { 
-    if (!validate(userDocument)) throw new Error("Número de documento do usuário inválido");
+    if (!validateCPF(userDocument)) throw new Error("Número de documento do usuário inválido");
 
     let valorTotal = products.reduce((acc, preco) => {
       return (preco.productPrice * preco.productQty) + acc
