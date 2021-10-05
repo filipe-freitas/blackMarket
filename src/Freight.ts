@@ -1,4 +1,5 @@
 export default class Freight {
+  readonly MINIMUM_FREIGHT_PRICE = 10;
   readonly distance: number;
   readonly weight: number;
   readonly height: number;
@@ -17,7 +18,9 @@ export default class Freight {
     const volume = this.calculateVolume();
     const density = this.calculateDensity(volume);
     const freightValue = distance * volume * (density/100);
-    return freightValue;
+    return (freightValue < this.MINIMUM_FREIGHT_PRICE)
+      ? this.MINIMUM_FREIGHT_PRICE
+      : parseFloat(freightValue.toPrecision(2));
   }
 
   calculateVolume(): number {
