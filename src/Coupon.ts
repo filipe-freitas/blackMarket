@@ -1,15 +1,10 @@
 export default class Coupon {
-  description: string;
-  percentage: number;
 
-  constructor(description: string, percentage: number) {
-    if(!this.isValid(description, percentage)) throw new Error('Invalid coupon');
-    this.description = description;
-    this.percentage = percentage;
+  constructor(readonly description: string, readonly percentage: number, readonly expiringDate?: Date) {
   }
 
-  isValid(description: string, percentage:number): boolean {
-    if (description === 'VALE10') return false;
+  isValid(today: Date = new Date()): boolean {
+    if (this.expiringDate && this.expiringDate < today) return false;
     return true;
   }
 }
