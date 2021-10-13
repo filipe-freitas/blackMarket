@@ -31,4 +31,13 @@ describe('Create an Order', () => {
     const total = order.getTotal();
     expect(total).toBe(4500);
   });
+
+  it('should be able to create an order with an invalid discount coupon', () => {
+    /* percentual sobre o total do pedido */
+    const order = new Order('935.411.347-80');
+    order.addItem(new Item('4', 'Playstation 5', 5000), 1);
+    order.addCoupon(new Coupon('JN10', 10, new Date(2021, 9, 10)));
+    const total = order.getTotal();
+    expect(total).toBe(5000);
+  });
 });
