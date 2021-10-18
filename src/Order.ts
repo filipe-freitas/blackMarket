@@ -4,9 +4,10 @@ import Item from './Item';
 import OrderItem from './OrderItem';
 
 export default class Order {
-  cpf: Cpf;
-  orderItems: OrderItem[];
-  coupon: Coupon | undefined;
+  private cpf: Cpf;
+  private orderItems: OrderItem[];
+  private coupon: Coupon | undefined;
+  private freigth: number = 0;
 
   constructor(cpf: string, readonly issueDate: Date = new Date()) {
     this.cpf = new Cpf(cpf);
@@ -14,7 +15,12 @@ export default class Order {
   }
 
   addItem(item: Item, quantity: number) {
+    this.freigth += item.getFreightValue() * quantity;
     this.orderItems.push(new OrderItem(item.id, item.description, item.price, quantity));
+  }
+
+  getFreight() {
+    return this.freigth;
   }
 
   getTotal() {
