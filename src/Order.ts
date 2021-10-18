@@ -4,17 +4,23 @@ import Item from './Item';
 import OrderItem from './OrderItem';
 
 export default class Order {
-  cpf: Cpf;
-  orderItems: OrderItem[];
-  coupon: Coupon | undefined;
+  private cpf: Cpf;
+  private orderItems: OrderItem[];
+  private coupon: Coupon | undefined;
+  private freigth: number = 0;
 
-  constructor(cpf: string) {
+  constructor(cpf: string, readonly issueDate: Date = new Date()) {
     this.cpf = new Cpf(cpf);
     this.orderItems = [];
   }
 
   addItem(item: Item, quantity: number) {
+    this.freigth += item.getFreightValue() * quantity;
     this.orderItems.push(new OrderItem(item.id, item.description, item.price, quantity));
+  }
+
+  getFreight() {
+    return this.freigth;
   }
 
   getTotal() {
@@ -23,6 +29,7 @@ export default class Order {
   }
 
   addCoupon(coupon: Coupon) {
+    if (!coupon.isValid(this.issueDate)) return;
     this.coupon = coupon;
   }
 }
