@@ -1,4 +1,4 @@
-import Coupon from "./Coupon";
+import Coupon from "../../src/domain/entities/Coupon";
 
 describe('Utilizing a coupon', () => {
   it('should validate a non-expired coupon', () => {

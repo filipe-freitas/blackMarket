@@ -1,4 +1,4 @@
-import Item from "./Item";
+import Item from "../../src/domain/entities/Item";
 
 describe('should test items', () => {
   it('should be able to recover volume, density and freight from an item', () => {
@@ -17,4 +17,4 @@ describe('should test items', () => {
     expect(item3.getVolume()).toBe(1);
     expect(item3.getDensity()).toBe(40);
   });
-})
+});

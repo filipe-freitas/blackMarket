@@ -1,6 +1,6 @@
-import Order from './Order';
-import Item from './Item';
-import Coupon from './Coupon';
+import Order from '../../src/domain/entities/Order';
+import Item from '../../src/domain/entities/Item';
+import Coupon from '../../src/domain/entities/Coupon';
 
 describe('Create an Order', () => {
   it('should not be able to create an order with an invalid document number', () => {

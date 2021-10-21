@@ -1,4 +1,4 @@
-import validateCPF from "./Cpf";
+import validateCPF from "../../src/domain/entities/Cpf";
 
 describe('Validating a CPF number', () => {
   it('should validate a valid CPF number', () => {
