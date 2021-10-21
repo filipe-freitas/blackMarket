@@ -8,6 +8,7 @@ export default class Order {
   private orderItems: OrderItem[];
   private coupon: Coupon | undefined;
   private freigth: number = 0;
+  private id: string;
 
   constructor(cpf: string, readonly issueDate: Date = new Date()) {
     this.cpf = new Cpf(cpf);
@@ -26,6 +27,15 @@ export default class Order {
   getTotal() {
     const fullPrice = this.orderItems.reduce((total, item) => total += item.price * item.quantity, 0);
     return this.coupon ? fullPrice - (fullPrice * (this.coupon.percentage/100)) : fullPrice;
+  }
+
+  setOrderId(id: string) {
+    if(!id.match(/^\d+$/)) throw new Error('Invalid id')
+    this.id = id;
+  }
+
+  getOrderId() {
+    return this.id;
   }
 
   addCoupon(coupon: Coupon) {
