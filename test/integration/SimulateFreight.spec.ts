@@ -1,10 +1,12 @@
 import SimulateFreight from "../../src/application/useCases/SimulateFreight";
+import ItemRepositoryMemory from "../../src/infra/repositories/memory/ItemRepositoryMemory";
 
 describe('Simulate Freight', () => {
   let simulateFreight: SimulateFreight;
 
   beforeEach(() => {
-    simulateFreight = new SimulateFreight();
+    const itemRepository = new ItemRepositoryMemory();
+    simulateFreight = new SimulateFreight(itemRepository);
   });
 
   it('should be able to simulate a freight', () => {
@@ -13,10 +15,10 @@ describe('Simulate Freight', () => {
   });
 
   it('should not be able to simulate a freight with an unexisting item', () => {
-    expect(() => simulateFreight.execute('')).toThrowError('Item does not exist');
+    expect(() => simulateFreight.execute('')).toThrowError('Item not found');
   });
 
   it('should not be able to simulate a freight with an unexisting item', () => {
-    expect(() => simulateFreight.execute('22')).toThrowError('Item does not exist');
+    expect(() => simulateFreight.execute('22')).toThrowError('Item not found');
   });
 });
