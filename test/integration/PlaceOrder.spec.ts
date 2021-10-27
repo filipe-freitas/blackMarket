@@ -1,10 +1,14 @@
 import PlaceOrder from "../../src/application/useCases/PlaceOrder";
+import ItemRepositoryMemory from "../../src/infra/repositories/memory/ItemRepositoryMemory";
+import OrderRepositoryMemory from "../../src/infra/repositories/memory/OrderRepositoryMemory";
 
 describe('Integration tests for placing an order', () => {
   let placeOrder: PlaceOrder;
 
   beforeEach(() => {
-    placeOrder = new PlaceOrder();
+    const itemRepository = new ItemRepositoryMemory();
+    const orderRepository = new OrderRepositoryMemory();
+    placeOrder = new PlaceOrder(itemRepository, orderRepository);
   });
 
   it('should be able to place an order', () => {
@@ -21,7 +25,7 @@ describe('Integration tests for placing an order', () => {
         quantity: 1
       }]
     });
-    expect(order.total).toBe(4920);
+    expect(order.total).toBe(6500);
   });
 
 
