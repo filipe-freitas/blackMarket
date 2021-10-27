@@ -1,4 +1,6 @@
 import ValidateCoupon from "../../src/application/useCases/ValidateCoupon";
+import CouponRepositoryDatabase from "../../src/infra/repositories/database/CouponRepositoryDatabase";
+import DatabaseConnectionAdapter from "../../src/infra/databases/DatabaseConnectionAdapter";
 import CouponRepositoryMemory from "../../src/infra/repositories/memory/CouponRepositoryMemory";
 
 describe('Validate a coupon', () => {
@@ -6,6 +8,8 @@ describe('Validate a coupon', () => {
   
   beforeEach(() => {
     //const couponRepository = new CouponRepositoryMemory();
+    const databaseConnection = new DatabaseConnectionAdapter();
+    const couponRepository = new CouponRepositoryDatabase(databaseConnection);
     validateCoupon = new ValidateCoupon(couponRepository);
   });
   
