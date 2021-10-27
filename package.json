@@ -13,5 +13,8 @@
     "tsc:init": "tsc --init",
     "build": "tsc",
     "test": "tsc && jest dist/"
+  },
+  "dependencies": {
+    "pg-promise": "^10.11.1"
   }
 }
