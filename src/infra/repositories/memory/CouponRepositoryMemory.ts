@@ -9,8 +9,8 @@ export default class CouponRepositoryMemory implements CouponRepository {
     new Coupon('VALE50', 50, new Date(2021, 7, 31))
   ];
 
-  async findById(couponDescription: string): Promise<Coupon | null> {
-    const foundCoupon = this.couponRepository.find(coupon => coupon.description === couponDescription);
+  async findByCode(couponCode: string): Promise<Coupon | null> {
+    const foundCoupon = this.couponRepository.find(coupon => coupon.code === couponCode);
     return foundCoupon ?? null;
   }
 
