@@ -1,6 +1,8 @@
 import Coupon from "../entities/Coupon";
 
-export default interface CouponRepository {
+interface CouponRepository {
   findByCode(couponCode: string): Promise<Coupon | null>;
   save(coupon: Coupon): void;
 }
+
+export { CouponRepository }

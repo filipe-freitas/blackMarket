@@ -1,7 +1,9 @@
 import Order from "../entities/Order";
 
-export default interface OrderRepository {
-  findById(orderId: string): Order;
+interface OrderRepository {
+  findById(orderId: string): Promise<Order | null>;
   save(order: Order): void;
-  registryCount(): number;
+  registryCount(): Promise<number>;
 }
+
+export { OrderRepository }

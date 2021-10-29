@@ -1,5 +1,5 @@
 import Item from "../../../domain/entities/Item";
-import ItemRepository from "../../../domain/repositories/ItemRepository";
+import { ItemRepository } from "../../../domain/repositories/ItemRepository";
 
 export default class ItemRepositoryMemory implements ItemRepository {
   private itemRepository: Item[] = [
@@ -8,7 +8,7 @@ export default class ItemRepositoryMemory implements ItemRepository {
     new Item('3', 'Geladeira', 4600, 40, 200, 100, 50)
   ];
 
-  findById(itemId: string): Item {
+  async findById(itemId: string): Promise<Item | null> {
     const foundItem = this.itemRepository.find(item => item.id === itemId);
     if(!foundItem) throw new Error('Item not found');
     return foundItem;
@@ -16,5 +16,4 @@ export default class ItemRepositoryMemory implements ItemRepository {
   save(item: Item): void {
     this.itemRepository.push(item);
   }
-
 }

@@ -1,10 +1,10 @@
 import Order from "../../../domain/entities/Order";
-import OrderRepository from "../../../domain/repositories/OrderRepository";
+import { OrderRepository } from "../../../domain/repositories/OrderRepository";
 
 export default class OrderRepositoryMemory implements OrderRepository {
   private orderRepository: Order[] = [];
 
-  findById(orderId: string): Order {
+  async findById(orderId: string): Promise<Order | null> {
     const foundOrder = this.orderRepository.find(order => order.getOrderId() === orderId);
     if(!foundOrder) throw new Error('Order not found');
     return foundOrder;
@@ -13,8 +13,8 @@ export default class OrderRepositoryMemory implements OrderRepository {
   save(order: Order): void {
     this.orderRepository.push(order);
   }
-  registryCount(): number {
+
+  async registryCount(): Promise<number> {
     return this.orderRepository.length;
   }
-
 }

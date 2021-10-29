@@ -1,6 +1,8 @@
 import Item from "../entities/Item";
 
-export default interface ItemRepository {
-  findById(itemId: string): Item;
+interface ItemRepository {
+  findById(itemId: string): Promise<Item | null>;
   save(item: Item): void;
 }
+
+export { ItemRepository }
